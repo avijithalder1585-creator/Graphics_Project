@@ -16,6 +16,13 @@ void drawCircle(float cx, float cy, float r, int segments = 50)
     glEnd();
 }
 
+// Sun
+void drawSun()
+{
+    glColor3f(1.0f, 0.9f, 0.0f);
+    drawCircle(-0.8f, 0.8f, 0.12f, 40);
+}
+
 void drawBackground()
 {
     // Sky
@@ -152,11 +159,24 @@ void drawTree(float x, float y, float scale)
     drawCircle(x, y + 0.12f*scale, 0.06f*scale, 30);
 }
 
+// Cloud (simple circles)
+void drawCloud(float x, float y, float scale)
+{
+    glColor3f(1.0f, 1.0f, 1.0f);
+    drawCircle(x,y, 0.06f*scale, 20);
+    drawCircle(x + 0.06f*scale, y, 0.05f*scale, 20);
+    drawCircle(x - 0.06f*scale, y, 0.05f*scale, 20);
+}
+
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
     drawBackground();
+    drawSun();
+    drawCloud(-0.5f,0.75f, 1.0f);
+    drawCloud(1-0.6f, 0.65f, 0.8f);
+    drawCloud(-0.7f, 0.70f, 0.9f);
 
     // Houses (placed behind trees, with different colors)
     // 1) Light orange walls, dark red roof
