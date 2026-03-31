@@ -43,6 +43,23 @@ void drawBackground()
     glVertex2f(-1.0f, -0.1f);
     glEnd();
 
+        // Road
+    glBegin(GL_QUADS);
+    glColor3f(0.2f, 0.2f, 0.2f);           // dark gray
+    glVertex2f(-1.0f, -0.1f);
+    glVertex2f( 1.0f, -0.1f);
+    glVertex2f( 1.0f, -0.5f);
+    glVertex2f(-1.0f, -0.5f);
+    glEnd();
+
+    // Road lines
+    glLineWidth(3.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glBegin(GL_LINES);
+    glVertex2f(-1.0f, -0.3f);
+    glVertex2f( 1.0f, -0.3f);
+    glEnd();
+
 
     glLineWidth(1.0f);
 }
