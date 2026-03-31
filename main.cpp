@@ -159,6 +159,76 @@ void drawHouse(float x, float y, float scale,
     glEnd();
 }
 
+// Car body
+void drawCar(float x, float y) {
+    glColor3f(1.0f, 0.75f, 0.0f);
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.14f, y);
+    glVertex2f(x + 0.14f, y);
+    glVertex2f(x + 0.13f, y + 0.065f);
+    glVertex2f(x - 0.13f, y + 0.065f);
+    glEnd();
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.12f, y + 0.065f);
+    glVertex2f(x + 0.10f, y + 0.065f);
+    glVertex2f(x + 0.06f,  y + 0.135f);
+    glVertex2f(x - 0.10f,  y + 0.135f);
+    glEnd();
+    glColor3f(0.6f, 0.82f, 0.95f);
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.09f,  y + 0.07f);
+    glVertex2f(x + 0.04f,  y + 0.07f);
+    glVertex2f(x + 0.02f,  y + 0.125f);
+    glVertex2f(x - 0.07f,  y + 0.125f);
+    glEnd();
+    glColor3f(0.2f, 0.2f, 0.2f);
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(x - 0.09f,  y + 0.07f);
+    glVertex2f(x + 0.04f,  y + 0.07f);
+    glVertex2f(x + 0.02f,  y + 0.125f);
+    glVertex2f(x - 0.07f,  y + 0.125f);
+    glEnd();
+    glColor3f(0.6f, 0.82f, 0.95f);
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.06f,  y + 0.075f);
+    glVertex2f(x + 0.08f,  y + 0.075f);
+    glVertex2f(x + 0.05f,  y + 0.13f);
+    glVertex2f(x - 0.08f,  y + 0.13f);
+    glEnd();
+    glColor3f(0.2f, 0.2f, 0.2f);
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(x - 0.06f,  y + 0.075f);
+    glVertex2f(x + 0.08f,  y + 0.075f);
+    glVertex2f(x + 0.05f,  y + 0.13f);
+    glVertex2f(x - 0.08f,  y + 0.13f);
+    glEnd();
+    glColor3f(0.25f, 0.2f, 0.1f);
+    glLineWidth(1.2f);
+    glBegin(GL_LINES);
+    glVertex2f(x - 0.11f, y + 0.065f);
+    glVertex2f(x - 0.11f, y + 0.135f);
+    glEnd();
+    glColor3f(0.35f, 0.32f, 0.3f);
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.115f, y + 0.095f);
+    glVertex2f(x - 0.105f, y + 0.095f);
+    glVertex2f(x - 0.105f, y + 0.105f);
+    glVertex2f(x - 0.115f, y + 0.105f);
+    glEnd();
+    glLineWidth(1.0f);
+    float wheelY = y - 0.008f;
+    float tireR  = 0.032f;
+    float rimR   = 0.018f;
+    glColor3f(0.08f, 0.08f, 0.08f);
+    drawCircle(x - 0.09f, wheelY, tireR, 24);
+    glColor3f(0.5f, 0.5f, 0.52f);
+    drawCircle(x - 0.09f, wheelY, rimR, 24);
+    glColor3f(0.08f, 0.08f, 0.08f);
+    drawCircle(x + 0.09f, wheelY, tireR, 24);
+    glColor3f(0.5f, 0.5f, 0.52f);
+    drawCircle(x + 0.09f, wheelY, rimR, 24);
+}
+
 // Tree
 void drawTree(float x, float y, float scale)
 {
@@ -217,6 +287,8 @@ void display()
     drawTree( 0.0f, -0.03f, 1.2f);
     drawTree( 0.4f, -0.04f, 1.0f);
     drawTree( 0.8f, -0.05f, 1.3f);
+
+    drawCar(0.3f, -0.38f);
 
 
     glutSwapBuffers();
