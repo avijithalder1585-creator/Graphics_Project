@@ -246,6 +246,22 @@ void drawTree(float x, float y, float scale)
     drawCircle(x, y + 0.12f*scale, 0.06f*scale, 30);
 }
 
+void drawBoat(float x, float y) {
+    glColor3f(0.4f, 0.2f, 0.0f);
+    glBegin(GL_POLYGON);
+    glVertex2f(x-0.15f, y);
+    glVertex2f(x+0.15f, y);
+    glVertex2f(x+0.10f, y-0.05f);
+    glVertex2f(x-0.10f, y-0.05f);
+    glEnd();
+    glColor3f(0.8f, 0.6f, 0.2f);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x, y);
+    glVertex2f(x, y+0.12f);
+    glVertex2f(x+0.10f, y+0.02f);
+    glEnd();
+}
+
 // Cloud (simple circles)
 void drawCloud(float x, float y, float scale)
 {
@@ -289,6 +305,7 @@ void display()
     drawTree( 0.8f, -0.05f, 1.3f);
 
     drawCar(0.3f, -0.38f);
+    drawBoat(-0.8f + 0.5f, -0.75f);
 
 
     glutSwapBuffers();
