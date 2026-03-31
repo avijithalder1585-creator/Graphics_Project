@@ -2,6 +2,11 @@
 #include <cstring>
 #include <cmath>
 
+// Positions / animation parameters
+float carX      = -1.2f;
+float cloudX    =  1.0f;
+float boatX     =  0.0f;
+
 // Basic circle (for sun, wheels, foliage, clouds)
 void drawCircle(float cx, float cy, float r, int segments = 50)
 {
@@ -277,9 +282,10 @@ void display()
 
     drawBackground();
     drawSun();
-    drawCloud(-0.5f,0.75f, 1.0f);
-    drawCloud(1-0.6f, 0.65f, 0.8f);
-    drawCloud(-0.7f, 0.70f, 0.9f);
+    // Clouds (moving)
+    drawCloud(cloudX,0.75f, 1.0f);
+    drawCloud(cloudX-0.6f, 0.65f, 0.8f);
+    drawCloud(cloudX+0.7f, 0.70f, 0.9f);
 
     // Houses (placed behind trees, with different colors)
     // 1) Light orange walls, dark red roof
@@ -304,11 +310,31 @@ void display()
     drawTree( 0.4f, -0.04f, 1.0f);
     drawTree( 0.8f, -0.05f, 1.3f);
 
-    drawCar(0.3f, -0.38f);
-    drawBoat(-0.8f + 0.5f, -0.75f);
+
+    drawCar(carX, -0.38f);
+    drawBoat(-0.8f + boatX, -0.75f);
 
 
     glutSwapBuffers();
+}
+
+void update(int)
+{
+    // Move car to the right; reset when off-screen
+    carX += 0.01f;
+    if (carX > 1.3f) carX = -1.3f;
+
+    // Move boat to the right; reset when off-screen
+    boatX += 0.008f;
+    if (boatX > 2.0f) boatX = -2.0f;
+
+    // Move clouds to the left slowly; loop
+    cloudX -= 0.002f;
+    if (cloudX < -1.5f) cloudX = 1.5f;
+
+
+    glutPostRedisplay();
+    glutTimerFunc(16, update, 0); // ~60 FPS
 }
 
 
@@ -325,12 +351,12 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Graphics Project");
+    glutCreateWindow("Simple OpenGL Roadside Scene");
 
     init();
 
     glutDisplayFunc(display);
-
+    glutTimerFunc(0, update, 0);
 
     glutMainLoop();
     return 0;
