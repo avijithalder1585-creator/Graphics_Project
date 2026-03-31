@@ -6,6 +6,7 @@
 float carX      = -1.2f;
 float cloudX    =  1.0f;
 float boatX     =  0.0f;
+float birdX     =  1.2f;
 
 // Basic circle (for sun, wheels, foliage, clouds)
 void drawCircle(float cx, float cy, float r, int segments = 50)
@@ -267,6 +268,20 @@ void drawBoat(float x, float y) {
     glEnd();
 }
 
+// Bird (simple "V" shape)
+void drawBird(float x, float y, float scale)
+{
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glLineWidth(2.0f);
+    glBegin(GL_LINES);
+    glVertex2f(x - 0.03f*scale, y);
+    glVertex2f(x,               y + 0.02f*scale);
+    glVertex2f(x,               y + 0.02f*scale);
+    glVertex2f(x + 0.03f*scale, y);
+    glEnd();
+    glLineWidth(1.0f);
+}
+
 // Cloud (simple circles)
 void drawCloud(float x, float y, float scale)
 {
@@ -314,6 +329,11 @@ void display()
     drawCar(carX, -0.38f);
     drawBoat(-0.8f + boatX, -0.75f);
 
+    // Birds (moving)
+    drawBird(birdX,       0.6f, 1.0f);
+    drawBird(birdX-0.3f,  0.65f, 1.0f);
+    drawBird(birdX-0.6f,  0.58f, 1.0f);
+
 
     glutSwapBuffers();
 }
@@ -331,6 +351,10 @@ void update(int)
     // Move clouds to the left slowly; loop
     cloudX -= 0.002f;
     if (cloudX < -1.5f) cloudX = 1.5f;
+
+    // Move birds to the left a bit faster
+    birdX -= 0.008f;
+    if (birdX < -1.5f) birdX = 1.5f;
 
 
     glutPostRedisplay();

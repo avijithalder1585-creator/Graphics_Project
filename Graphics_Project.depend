@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1773776971 source:d:\webgl\graphics_project\main.cpp
+1774986922 source:d:\webgl\graphics_project\main.cpp
 	<GL/glut.h>
 	<cstring>
 	<cmath>
